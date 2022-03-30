@@ -4,6 +4,7 @@ namespace App\Security;
 
 use App\Entity\User;
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -63,14 +64,13 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
     {
         try {
             $credentials = str_replace('Bearer ', '', $credentials);
-            $jwt = (array) JWT::decode(
+            $jwt = JWT::decode(
                 $credentials,
-                $this->params->get('jwt_secret'),
-                ['HS256']
+                new Key($this->params->get('jwt_secret'), 'HS256')
             );
             return $this->em->getRepository(User::class)
                 ->findOneBy([
-                    'email' => $jwt['user'],
+                    'email' => $jwt->user,
                 ]);
         } catch (\Exception $exception) {
             throw new AuthenticationException($exception->getMessage());
@@ -81,14 +81,13 @@ class JwtAuthenticator extends AbstractGuardAuthenticator
     {
         $success = false;
         $credentials = str_replace('Bearer ', '', $credentials);
-        $jwt = (array) JWT::decode(
+        $jwt = JWT::decode(
             $credentials,
-            $this->params->get('jwt_secret'),
-            ['HS256']
+            new Key($this->params->get('jwt_secret'), 'HS256')
         );
         $user = $this->em->getRepository(User::class)
             ->findOneBy([
-                'email' => $jwt['user'],
+                'email' => $jwt->user,
             ]);
         if (!is_null($user)) {
             if ($user->getJwt() == $credentials) {
