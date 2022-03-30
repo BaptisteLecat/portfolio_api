@@ -40,18 +40,18 @@ class AuthController extends AbstractController
      */
     public function register(Request $request, UserPasswordEncoderInterface $encoder)
     {
-        $name = $request->get('name');
+        $lastname = $request->get('lastname');
         $firstname = $request->get('firstname');
         $email = $request->get('email');
         $password = $request->get('password');
-        if (!is_null($name) && !is_null($firstname) && !is_null($email) && !is_null($password)) {
+        if (!is_null($lastname) && !is_null($firstname) && !is_null($email) && !is_null($password)) {
             $repository = $this->getDoctrine()->getRepository(User::class);
             $user = $repository->findOneBy(['email' => $email]);
             if (is_null($user)) {
                 $user = new User();
                 $user->setPassword($encoder->encodePassword($user, $password));
                 $user->setFirstname($firstname);
-                $user->setName($name);
+                $user->setLastName($lastname);
                 $user->setEmail($email);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
@@ -104,6 +104,6 @@ class AuthController extends AbstractController
                 ], 404);
             }
         }
-        return $this->json(["id" => $user->getId(), "name" => $user->getName(), "firstname" => $user->getFirstname(), "email" => $user->getEmail(), "roles" => $user->getRoles(), "jwt" => $user->getJwt()]);
+        return $this->json(["id" => $user->getId(), "lastname" => $user->getLastName(), "firstname" => $user->getFirstname(), "email" => $user->getEmail(), "roles" => $user->getRoles(), "jwt" => $user->getJwt()]);
     }
 }
