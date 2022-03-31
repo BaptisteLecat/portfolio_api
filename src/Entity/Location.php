@@ -7,9 +7,23 @@ use App\Repository\LocationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ * normalizationContext={"groups"={"location:get"}, "skip_null_values" = false },
+ *      attributes={"security"="is_granted('ROLE_ADMIN')"},
+ *      collectionOperations={
+ *          "get"={"groups"={"locations:get"}, "security"="is_granted('ROLE_USER')"},
+ *          "post"={"denormalization_context"={"groups"="denormalization_locations:post"}},
+ *      },
+ *      itemOperations={
+ *          "get"={"groups"={"location:get"}, "security"="is_granted('ROLE_USER') or object.getUser() == user"},
+ *          "put"={"groups"={"location:put"}, "security"="is_granted('ROLE_ADMIN')", "denormalization_context"={"groups"="denormalization_barcode:put"}},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN') or object.getUser() == user"},
+ *      }
+ * )
  * @ORM\Entity(repositoryClass=LocationRepository::class)
  */
 class Location
@@ -18,41 +32,49 @@ class Location
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"location:get","locations:get", "company:get","companies:get", "course:get","courses:get", "school:get","schools:get", "work:get","works:get"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"location:get","locations:get", "denormalization_locations:post", "location:put", "company:get","companies:get", "course:get","courses:get", "school:get","schools:get", "work:get","works:get"})
      */
     private $label;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups({"location:get","locations:get", "denormalization_locations:post", "location:put", "company:get","companies:get", "course:get","courses:get", "school:get","schools:get", "work:get","works:get"})
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups({"location:get","locations:get", "denormalization_locations:post", "location:put", "company:get","companies:get", "course:get","courses:get", "school:get","schools:get", "work:get","works:get"})
      */
     private $longitude;
 
     /**
      * @ORM\OneToMany(targetEntity=School::class, mappedBy="location", orphanRemoval=true)
+     * @ApiSubresource(maxDepth=1)
      */
     private $schools;
 
     /**
      * @ORM\OneToMany(targetEntity=Company::class, mappedBy="location", orphanRemoval=true)
+     * @ApiSubresource(maxDepth=1)
      */
     private $companies;
 
     /**
      * @ORM\OneToMany(targetEntity=Work::class, mappedBy="location", orphanRemoval=true)
+     * @ApiSubresource(maxDepth=1)
      */
     private $works;
 
     /**
      * @ORM\OneToMany(targetEntity=Course::class, mappedBy="location", orphanRemoval=true)
+     * @ApiSubresource(maxDepth=1)
      */
     private $courses;
 

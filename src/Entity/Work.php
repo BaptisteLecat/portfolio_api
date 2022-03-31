@@ -5,9 +5,23 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\WorkRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ * normalizationContext={"groups"={"work:get"}, "skip_null_values" = false },
+ *      attributes={"security"="is_granted('ROLE_ADMIN')"},
+ *      collectionOperations={
+ *          "get"={"groups"={"works:get"}, "security"="is_granted('ROLE_USER')"},
+ *          "post"={"denormalization_context"={"groups"="denormalization_works:post"}},
+ *      },
+ *      itemOperations={
+ *          "get"={"groups"={"work:get"}, "security"="is_granted('ROLE_USER') or object.getUser() == user"},
+ *          "put"={"groups"={"work:put"}, "security"="is_granted('ROLE_ADMIN')", "denormalization_context"={"groups"="denormalization_barcode:put"}},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN') or object.getUser() == user"},
+ *      }
+ * )
  * @ORM\Entity(repositoryClass=WorkRepository::class)
  */
 class Work
@@ -16,44 +30,52 @@ class Work
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"work:get","works:get"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"work:get","works:get", "denormalization_works:post", "work:put"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"work:get","works:get", "denormalization_works:post", "work:put"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"work:get","works:get", "denormalization_works:post", "work:put"})
      */
     private $time;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"work:get","works:get", "denormalization_works:post", "work:put"})
      */
     private $description;
 
     /**
      * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="works")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"work:get","works:get", "denormalization_works:post", "work:put"})
      */
     private $company;
 
     /**
      * @ORM\ManyToOne(targetEntity=Contract::class, inversedBy="works")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"work:get","works:get", "denormalization_works:post", "work:put"})
      */
     private $contract;
 
     /**
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="works")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"work:get","works:get", "denormalization_works:post", "work:put"})
      */
     private $location;
 

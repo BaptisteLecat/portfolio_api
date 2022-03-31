@@ -5,9 +5,23 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\TechnologyRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ * normalizationContext={"groups"={"technology:get"}, "skip_null_values" = false },
+ *      attributes={"security"="is_granted('ROLE_ADMIN')"},
+ *      collectionOperations={
+ *          "get"={"groups"={"technologies:get"}, "security"="is_granted('ROLE_USER')"},
+ *          "post"={"denormalization_context"={"groups"="denormalization_technologies:post"}},
+ *      },
+ *      itemOperations={
+ *          "get"={"groups"={"technology:get"}, "security"="is_granted('ROLE_USER') or object.getUser() == user"},
+ *          "put"={"groups"={"technology:put"}, "security"="is_granted('ROLE_ADMIN')", "denormalization_context"={"groups"="denormalization_barcode:put"}},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN') or object.getUser() == user"},
+ *      }
+ * )
  * @ORM\Entity(repositoryClass=TechnologyRepository::class)
  */
 class Technology
@@ -16,21 +30,25 @@ class Technology
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     */
+     * @Groups({"technology:get","technologies:get"})
+     */ 
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"technology:get","technologies:get", "denormalization_technologies:post", "technology:put"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"technology:get","technologies:get", "denormalization_technologies:post", "technology:put"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"technology:get","technologies:get", "denormalization_technologies:post", "technology:put"})
      */
     private $description;
 

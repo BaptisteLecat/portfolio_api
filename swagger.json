@@ -29,7 +29,7 @@
                                         "hydra:member": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/Company.jsonld"
+                                                "$ref": "#/components/schemas/Company.jsonld-company.get"
                                             }
                                         },
                                         "hydra:totalItems": {
@@ -109,7 +109,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Company"
+                                        "$ref": "#/components/schemas/Company-company.get"
                                     }
                                 }
                             },
@@ -117,7 +117,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Company"
+                                        "$ref": "#/components/schemas/Company-company.get"
                                     }
                                 }
                             }
@@ -156,17 +156,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Company.jsonld"
+                                    "$ref": "#/components/schemas/Company.jsonld-company.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Company"
+                                    "$ref": "#/components/schemas/Company-company.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Company"
+                                    "$ref": "#/components/schemas/Company-company.get"
                                 }
                             }
                         },
@@ -195,17 +195,17 @@
                     "content": {
                         "application/ld+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Company.jsonld"
+                                "$ref": "#/components/schemas/Company.jsonld-denormalization_companies.post"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Company"
+                                "$ref": "#/components/schemas/Company-denormalization_companies.post"
                             }
                         },
                         "text/html": {
                             "schema": {
-                                "$ref": "#/components/schemas/Company"
+                                "$ref": "#/components/schemas/Company-denormalization_companies.post"
                             }
                         }
                     },
@@ -227,17 +227,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Company.jsonld"
+                                    "$ref": "#/components/schemas/Company.jsonld-company.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Company"
+                                    "$ref": "#/components/schemas/Company-company.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Company"
+                                    "$ref": "#/components/schemas/Company-company.get"
                                 }
                             }
                         }
@@ -277,17 +277,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Company.jsonld"
+                                    "$ref": "#/components/schemas/Company.jsonld-company.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Company"
+                                    "$ref": "#/components/schemas/Company-company.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Company"
+                                    "$ref": "#/components/schemas/Company-company.get"
                                 }
                             }
                         },
@@ -334,17 +334,17 @@
                     "content": {
                         "application/ld+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Company.jsonld"
+                                "$ref": "#/components/schemas/Company.jsonld-denormalization_barcode.put"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Company"
+                                "$ref": "#/components/schemas/Company-denormalization_barcode.put"
                             }
                         },
                         "text/html": {
                             "schema": {
-                                "$ref": "#/components/schemas/Company"
+                                "$ref": "#/components/schemas/Company-denormalization_barcode.put"
                             }
                         }
                     },
@@ -385,93 +385,18 @@
                 ],
                 "deprecated": false
             },
-            "patch": {
-                "operationId": "patchCompanyItem",
+            "parameters": []
+        },
+        "/api/companies/{id}/works": {
+            "get": {
+                "operationId": "api_companies_works_get_subresourceCompanySubresource",
                 "tags": [
+                    "Work",
                     "Company"
                 ],
                 "responses": {
                     "200": {
-                        "description": "Company resource updated",
-                        "content": {
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Company.jsonld"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Company"
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Company"
-                                }
-                            }
-                        },
-                        "links": {
-                            "GetCompanyItem": {
-                                "operationId": "getCompanyItem",
-                                "parameters": {
-                                    "id": "$response.body#/id"
-                                },
-                                "description": "The `id` value returned in the response can be used as the `id` parameter in `GET /api/companies/{id}`."
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid input"
-                    },
-                    "422": {
-                        "description": "Unprocessable entity"
-                    },
-                    "404": {
-                        "description": "Resource not found"
-                    }
-                },
-                "summary": "Updates the Company resource.",
-                "description": "Updates the Company resource.",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Resource identifier",
-                        "required": true,
-                        "deprecated": false,
-                        "allowEmptyValue": false,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "style": "simple",
-                        "explode": false,
-                        "allowReserved": false
-                    }
-                ],
-                "requestBody": {
-                    "description": "The updated Company resource",
-                    "content": {
-                        "application/merge-patch+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Company"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "deprecated": false
-            },
-            "parameters": []
-        },
-        "/api/contracts": {
-            "get": {
-                "operationId": "getContractCollection",
-                "tags": [
-                    "Contract"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Contract collection",
+                        "description": "Company resource",
                         "content": {
                             "application/ld+json": {
                                 "schema": {
@@ -480,7 +405,7 @@
                                         "hydra:member": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/Contract.jsonld"
+                                                "$ref": "#/components/schemas/Work.jsonld-work.get"
                                             }
                                         },
                                         "hydra:totalItems": {
@@ -560,7 +485,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Contract"
+                                        "$ref": "#/components/schemas/Work-work.get"
                                     }
                                 }
                             },
@@ -568,7 +493,156 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Contract"
+                                        "$ref": "#/components/schemas/Work-work.get"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Retrieves a Company resource.",
+                "description": "Retrieves a Company resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Company identifier",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The collection page number",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    }
+                ],
+                "deprecated": false
+            },
+            "parameters": []
+        },
+        "/api/contracts": {
+            "get": {
+                "operationId": "getContractCollection",
+                "tags": [
+                    "Contract"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Contract collection",
+                        "content": {
+                            "application/ld+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "hydra:member": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Contract.jsonld-contract.get"
+                                            }
+                                        },
+                                        "hydra:totalItems": {
+                                            "type": "integer",
+                                            "minimum": 0
+                                        },
+                                        "hydra:view": {
+                                            "type": "object",
+                                            "properties": {
+                                                "@id": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "@type": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:first": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:last": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:previous": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:next": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                }
+                                            }
+                                        },
+                                        "hydra:search": {
+                                            "type": "object",
+                                            "properties": {
+                                                "@type": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:template": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:variableRepresentation": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:mapping": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "@type": {
+                                                                "type": "string"
+                                                            },
+                                                            "variable": {
+                                                                "type": "string"
+                                                            },
+                                                            "property": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            },
+                                                            "required": {
+                                                                "type": "boolean"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "hydra:member"
+                                    ]
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Contract-contract.get"
+                                    }
+                                }
+                            },
+                            "text/html": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Contract-contract.get"
                                     }
                                 }
                             }
@@ -607,17 +681,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Contract.jsonld"
+                                    "$ref": "#/components/schemas/Contract.jsonld-contract.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Contract"
+                                    "$ref": "#/components/schemas/Contract-contract.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Contract"
+                                    "$ref": "#/components/schemas/Contract-contract.get"
                                 }
                             }
                         },
@@ -646,17 +720,17 @@
                     "content": {
                         "application/ld+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Contract.jsonld"
+                                "$ref": "#/components/schemas/Contract.jsonld-denormalization_contracts.post"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Contract"
+                                "$ref": "#/components/schemas/Contract-denormalization_contracts.post"
                             }
                         },
                         "text/html": {
                             "schema": {
-                                "$ref": "#/components/schemas/Contract"
+                                "$ref": "#/components/schemas/Contract-denormalization_contracts.post"
                             }
                         }
                     },
@@ -678,17 +752,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Contract.jsonld"
+                                    "$ref": "#/components/schemas/Contract.jsonld-contract.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Contract"
+                                    "$ref": "#/components/schemas/Contract-contract.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Contract"
+                                    "$ref": "#/components/schemas/Contract-contract.get"
                                 }
                             }
                         }
@@ -728,17 +802,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Contract.jsonld"
+                                    "$ref": "#/components/schemas/Contract.jsonld-contract.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Contract"
+                                    "$ref": "#/components/schemas/Contract-contract.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Contract"
+                                    "$ref": "#/components/schemas/Contract-contract.get"
                                 }
                             }
                         },
@@ -785,17 +859,17 @@
                     "content": {
                         "application/ld+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Contract.jsonld"
+                                "$ref": "#/components/schemas/Contract.jsonld-denormalization_barcode.put"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Contract"
+                                "$ref": "#/components/schemas/Contract-denormalization_barcode.put"
                             }
                         },
                         "text/html": {
                             "schema": {
-                                "$ref": "#/components/schemas/Contract"
+                                "$ref": "#/components/schemas/Contract-denormalization_barcode.put"
                             }
                         }
                     },
@@ -836,93 +910,18 @@
                 ],
                 "deprecated": false
             },
-            "patch": {
-                "operationId": "patchContractItem",
+            "parameters": []
+        },
+        "/api/contracts/{id}/works": {
+            "get": {
+                "operationId": "api_contracts_works_get_subresourceContractSubresource",
                 "tags": [
+                    "Work",
                     "Contract"
                 ],
                 "responses": {
                     "200": {
-                        "description": "Contract resource updated",
-                        "content": {
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Contract.jsonld"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Contract"
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Contract"
-                                }
-                            }
-                        },
-                        "links": {
-                            "GetContractItem": {
-                                "operationId": "getContractItem",
-                                "parameters": {
-                                    "id": "$response.body#/id"
-                                },
-                                "description": "The `id` value returned in the response can be used as the `id` parameter in `GET /api/contracts/{id}`."
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid input"
-                    },
-                    "422": {
-                        "description": "Unprocessable entity"
-                    },
-                    "404": {
-                        "description": "Resource not found"
-                    }
-                },
-                "summary": "Updates the Contract resource.",
-                "description": "Updates the Contract resource.",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Resource identifier",
-                        "required": true,
-                        "deprecated": false,
-                        "allowEmptyValue": false,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "style": "simple",
-                        "explode": false,
-                        "allowReserved": false
-                    }
-                ],
-                "requestBody": {
-                    "description": "The updated Contract resource",
-                    "content": {
-                        "application/merge-patch+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Contract"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "deprecated": false
-            },
-            "parameters": []
-        },
-        "/api/courses": {
-            "get": {
-                "operationId": "getCourseCollection",
-                "tags": [
-                    "Course"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Course collection",
+                        "description": "Contract resource",
                         "content": {
                             "application/ld+json": {
                                 "schema": {
@@ -931,7 +930,7 @@
                                         "hydra:member": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/Course.jsonld"
+                                                "$ref": "#/components/schemas/Work.jsonld-work.get"
                                             }
                                         },
                                         "hydra:totalItems": {
@@ -1011,7 +1010,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Course"
+                                        "$ref": "#/components/schemas/Work-work.get"
                                     }
                                 }
                             },
@@ -1019,7 +1018,156 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Course"
+                                        "$ref": "#/components/schemas/Work-work.get"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Retrieves a Contract resource.",
+                "description": "Retrieves a Contract resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Contract identifier",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The collection page number",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    }
+                ],
+                "deprecated": false
+            },
+            "parameters": []
+        },
+        "/api/courses": {
+            "get": {
+                "operationId": "getCourseCollection",
+                "tags": [
+                    "Course"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Course collection",
+                        "content": {
+                            "application/ld+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "hydra:member": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Course.jsonld-course.get"
+                                            }
+                                        },
+                                        "hydra:totalItems": {
+                                            "type": "integer",
+                                            "minimum": 0
+                                        },
+                                        "hydra:view": {
+                                            "type": "object",
+                                            "properties": {
+                                                "@id": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "@type": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:first": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:last": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:previous": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:next": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                }
+                                            }
+                                        },
+                                        "hydra:search": {
+                                            "type": "object",
+                                            "properties": {
+                                                "@type": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:template": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:variableRepresentation": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:mapping": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "@type": {
+                                                                "type": "string"
+                                                            },
+                                                            "variable": {
+                                                                "type": "string"
+                                                            },
+                                                            "property": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            },
+                                                            "required": {
+                                                                "type": "boolean"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "hydra:member"
+                                    ]
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Course-course.get"
+                                    }
+                                }
+                            },
+                            "text/html": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Course-course.get"
                                     }
                                 }
                             }
@@ -1058,17 +1206,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Course.jsonld"
+                                    "$ref": "#/components/schemas/Course.jsonld-course.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Course"
+                                    "$ref": "#/components/schemas/Course-course.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Course"
+                                    "$ref": "#/components/schemas/Course-course.get"
                                 }
                             }
                         },
@@ -1097,17 +1245,17 @@
                     "content": {
                         "application/ld+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Course.jsonld"
+                                "$ref": "#/components/schemas/Course.jsonld-denormalization_courses.post"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Course"
+                                "$ref": "#/components/schemas/Course-denormalization_courses.post"
                             }
                         },
                         "text/html": {
                             "schema": {
-                                "$ref": "#/components/schemas/Course"
+                                "$ref": "#/components/schemas/Course-denormalization_courses.post"
                             }
                         }
                     },
@@ -1129,17 +1277,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Course.jsonld"
+                                    "$ref": "#/components/schemas/Course.jsonld-course.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Course"
+                                    "$ref": "#/components/schemas/Course-course.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Course"
+                                    "$ref": "#/components/schemas/Course-course.get"
                                 }
                             }
                         }
@@ -1179,17 +1327,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Course.jsonld"
+                                    "$ref": "#/components/schemas/Course.jsonld-course.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Course"
+                                    "$ref": "#/components/schemas/Course-course.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Course"
+                                    "$ref": "#/components/schemas/Course-course.get"
                                 }
                             }
                         },
@@ -1236,17 +1384,17 @@
                     "content": {
                         "application/ld+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Course.jsonld"
+                                "$ref": "#/components/schemas/Course.jsonld-denormalization_barcode.put"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Course"
+                                "$ref": "#/components/schemas/Course-denormalization_barcode.put"
                             }
                         },
                         "text/html": {
                             "schema": {
-                                "$ref": "#/components/schemas/Course"
+                                "$ref": "#/components/schemas/Course-denormalization_barcode.put"
                             }
                         }
                     },
@@ -1287,82 +1435,6 @@
                 ],
                 "deprecated": false
             },
-            "patch": {
-                "operationId": "patchCourseItem",
-                "tags": [
-                    "Course"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Course resource updated",
-                        "content": {
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Course.jsonld"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Course"
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Course"
-                                }
-                            }
-                        },
-                        "links": {
-                            "GetCourseItem": {
-                                "operationId": "getCourseItem",
-                                "parameters": {
-                                    "id": "$response.body#/id"
-                                },
-                                "description": "The `id` value returned in the response can be used as the `id` parameter in `GET /api/courses/{id}`."
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid input"
-                    },
-                    "422": {
-                        "description": "Unprocessable entity"
-                    },
-                    "404": {
-                        "description": "Resource not found"
-                    }
-                },
-                "summary": "Updates the Course resource.",
-                "description": "Updates the Course resource.",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Resource identifier",
-                        "required": true,
-                        "deprecated": false,
-                        "allowEmptyValue": false,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "style": "simple",
-                        "explode": false,
-                        "allowReserved": false
-                    }
-                ],
-                "requestBody": {
-                    "description": "The updated Course resource",
-                    "content": {
-                        "application/merge-patch+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Course"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "deprecated": false
-            },
             "parameters": []
         },
         "/api/locations": {
@@ -1382,7 +1454,7 @@
                                         "hydra:member": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/Location.jsonld"
+                                                "$ref": "#/components/schemas/Location.jsonld-location.get"
                                             }
                                         },
                                         "hydra:totalItems": {
@@ -1462,7 +1534,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Location"
+                                        "$ref": "#/components/schemas/Location-location.get"
                                     }
                                 }
                             },
@@ -1470,7 +1542,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Location"
+                                        "$ref": "#/components/schemas/Location-location.get"
                                     }
                                 }
                             }
@@ -1509,17 +1581,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Location.jsonld"
+                                    "$ref": "#/components/schemas/Location.jsonld-location.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Location"
+                                    "$ref": "#/components/schemas/Location-location.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Location"
+                                    "$ref": "#/components/schemas/Location-location.get"
                                 }
                             }
                         },
@@ -1548,17 +1620,17 @@
                     "content": {
                         "application/ld+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Location.jsonld"
+                                "$ref": "#/components/schemas/Location.jsonld-denormalization_locations.post"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Location"
+                                "$ref": "#/components/schemas/Location-denormalization_locations.post"
                             }
                         },
                         "text/html": {
                             "schema": {
-                                "$ref": "#/components/schemas/Location"
+                                "$ref": "#/components/schemas/Location-denormalization_locations.post"
                             }
                         }
                     },
@@ -1580,17 +1652,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Location.jsonld"
+                                    "$ref": "#/components/schemas/Location.jsonld-location.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Location"
+                                    "$ref": "#/components/schemas/Location-location.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Location"
+                                    "$ref": "#/components/schemas/Location-location.get"
                                 }
                             }
                         }
@@ -1630,17 +1702,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Location.jsonld"
+                                    "$ref": "#/components/schemas/Location.jsonld-location.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Location"
+                                    "$ref": "#/components/schemas/Location-location.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Location"
+                                    "$ref": "#/components/schemas/Location-location.get"
                                 }
                             }
                         },
@@ -1687,17 +1759,17 @@
                     "content": {
                         "application/ld+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Location.jsonld"
+                                "$ref": "#/components/schemas/Location.jsonld-denormalization_barcode.put"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Location"
+                                "$ref": "#/components/schemas/Location-denormalization_barcode.put"
                             }
                         },
                         "text/html": {
                             "schema": {
-                                "$ref": "#/components/schemas/Location"
+                                "$ref": "#/components/schemas/Location-denormalization_barcode.put"
                             }
                         }
                     },
@@ -1738,93 +1810,18 @@
                 ],
                 "deprecated": false
             },
-            "patch": {
-                "operationId": "patchLocationItem",
+            "parameters": []
+        },
+        "/api/locations/{id}/companies": {
+            "get": {
+                "operationId": "api_locations_companies_get_subresourceLocationSubresource",
                 "tags": [
+                    "Company",
                     "Location"
                 ],
                 "responses": {
                     "200": {
-                        "description": "Location resource updated",
-                        "content": {
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Location.jsonld"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Location"
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Location"
-                                }
-                            }
-                        },
-                        "links": {
-                            "GetLocationItem": {
-                                "operationId": "getLocationItem",
-                                "parameters": {
-                                    "id": "$response.body#/id"
-                                },
-                                "description": "The `id` value returned in the response can be used as the `id` parameter in `GET /api/locations/{id}`."
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid input"
-                    },
-                    "422": {
-                        "description": "Unprocessable entity"
-                    },
-                    "404": {
-                        "description": "Resource not found"
-                    }
-                },
-                "summary": "Updates the Location resource.",
-                "description": "Updates the Location resource.",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Resource identifier",
-                        "required": true,
-                        "deprecated": false,
-                        "allowEmptyValue": false,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "style": "simple",
-                        "explode": false,
-                        "allowReserved": false
-                    }
-                ],
-                "requestBody": {
-                    "description": "The updated Location resource",
-                    "content": {
-                        "application/merge-patch+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Location"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "deprecated": false
-            },
-            "parameters": []
-        },
-        "/api/schools": {
-            "get": {
-                "operationId": "getSchoolCollection",
-                "tags": [
-                    "School"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "School collection",
+                        "description": "Location resource",
                         "content": {
                             "application/ld+json": {
                                 "schema": {
@@ -1833,7 +1830,7 @@
                                         "hydra:member": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/School.jsonld"
+                                                "$ref": "#/components/schemas/Company.jsonld-company.get"
                                             }
                                         },
                                         "hydra:totalItems": {
@@ -1913,7 +1910,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/School"
+                                        "$ref": "#/components/schemas/Company-company.get"
                                     }
                                 }
                             },
@@ -1921,7 +1918,606 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/School"
+                                        "$ref": "#/components/schemas/Company-company.get"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Retrieves a Location resource.",
+                "description": "Retrieves a Location resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Location identifier",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The collection page number",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    }
+                ],
+                "deprecated": false
+            },
+            "parameters": []
+        },
+        "/api/locations/{id}/courses": {
+            "get": {
+                "operationId": "api_locations_courses_get_subresourceLocationSubresource",
+                "tags": [
+                    "Course",
+                    "Location"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Location resource",
+                        "content": {
+                            "application/ld+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "hydra:member": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Course.jsonld-course.get"
+                                            }
+                                        },
+                                        "hydra:totalItems": {
+                                            "type": "integer",
+                                            "minimum": 0
+                                        },
+                                        "hydra:view": {
+                                            "type": "object",
+                                            "properties": {
+                                                "@id": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "@type": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:first": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:last": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:previous": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:next": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                }
+                                            }
+                                        },
+                                        "hydra:search": {
+                                            "type": "object",
+                                            "properties": {
+                                                "@type": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:template": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:variableRepresentation": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:mapping": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "@type": {
+                                                                "type": "string"
+                                                            },
+                                                            "variable": {
+                                                                "type": "string"
+                                                            },
+                                                            "property": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            },
+                                                            "required": {
+                                                                "type": "boolean"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "hydra:member"
+                                    ]
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Course-course.get"
+                                    }
+                                }
+                            },
+                            "text/html": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Course-course.get"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Retrieves a Location resource.",
+                "description": "Retrieves a Location resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Location identifier",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The collection page number",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    }
+                ],
+                "deprecated": false
+            },
+            "parameters": []
+        },
+        "/api/locations/{id}/schools": {
+            "get": {
+                "operationId": "api_locations_schools_get_subresourceLocationSubresource",
+                "tags": [
+                    "School",
+                    "Location"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Location resource",
+                        "content": {
+                            "application/ld+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "hydra:member": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/School.jsonld-school.get"
+                                            }
+                                        },
+                                        "hydra:totalItems": {
+                                            "type": "integer",
+                                            "minimum": 0
+                                        },
+                                        "hydra:view": {
+                                            "type": "object",
+                                            "properties": {
+                                                "@id": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "@type": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:first": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:last": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:previous": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:next": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                }
+                                            }
+                                        },
+                                        "hydra:search": {
+                                            "type": "object",
+                                            "properties": {
+                                                "@type": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:template": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:variableRepresentation": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:mapping": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "@type": {
+                                                                "type": "string"
+                                                            },
+                                                            "variable": {
+                                                                "type": "string"
+                                                            },
+                                                            "property": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            },
+                                                            "required": {
+                                                                "type": "boolean"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "hydra:member"
+                                    ]
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/School-school.get"
+                                    }
+                                }
+                            },
+                            "text/html": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/School-school.get"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Retrieves a Location resource.",
+                "description": "Retrieves a Location resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Location identifier",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The collection page number",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    }
+                ],
+                "deprecated": false
+            },
+            "parameters": []
+        },
+        "/api/locations/{id}/works": {
+            "get": {
+                "operationId": "api_locations_works_get_subresourceLocationSubresource",
+                "tags": [
+                    "Work",
+                    "Location"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Location resource",
+                        "content": {
+                            "application/ld+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "hydra:member": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Work.jsonld-work.get"
+                                            }
+                                        },
+                                        "hydra:totalItems": {
+                                            "type": "integer",
+                                            "minimum": 0
+                                        },
+                                        "hydra:view": {
+                                            "type": "object",
+                                            "properties": {
+                                                "@id": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "@type": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:first": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:last": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:previous": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:next": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                }
+                                            }
+                                        },
+                                        "hydra:search": {
+                                            "type": "object",
+                                            "properties": {
+                                                "@type": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:template": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:variableRepresentation": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:mapping": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "@type": {
+                                                                "type": "string"
+                                                            },
+                                                            "variable": {
+                                                                "type": "string"
+                                                            },
+                                                            "property": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            },
+                                                            "required": {
+                                                                "type": "boolean"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "hydra:member"
+                                    ]
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Work-work.get"
+                                    }
+                                }
+                            },
+                            "text/html": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Work-work.get"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Retrieves a Location resource.",
+                "description": "Retrieves a Location resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Location identifier",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The collection page number",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    }
+                ],
+                "deprecated": false
+            },
+            "parameters": []
+        },
+        "/api/schools": {
+            "get": {
+                "operationId": "getSchoolCollection",
+                "tags": [
+                    "School"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "School collection",
+                        "content": {
+                            "application/ld+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "hydra:member": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/School.jsonld-school.get"
+                                            }
+                                        },
+                                        "hydra:totalItems": {
+                                            "type": "integer",
+                                            "minimum": 0
+                                        },
+                                        "hydra:view": {
+                                            "type": "object",
+                                            "properties": {
+                                                "@id": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "@type": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:first": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:last": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:previous": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:next": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                }
+                                            }
+                                        },
+                                        "hydra:search": {
+                                            "type": "object",
+                                            "properties": {
+                                                "@type": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:template": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:variableRepresentation": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:mapping": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "@type": {
+                                                                "type": "string"
+                                                            },
+                                                            "variable": {
+                                                                "type": "string"
+                                                            },
+                                                            "property": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            },
+                                                            "required": {
+                                                                "type": "boolean"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "hydra:member"
+                                    ]
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/School-school.get"
+                                    }
+                                }
+                            },
+                            "text/html": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/School-school.get"
                                     }
                                 }
                             }
@@ -1960,17 +2556,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/School.jsonld"
+                                    "$ref": "#/components/schemas/School.jsonld-school.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/School"
+                                    "$ref": "#/components/schemas/School-school.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/School"
+                                    "$ref": "#/components/schemas/School-school.get"
                                 }
                             }
                         },
@@ -1999,17 +2595,17 @@
                     "content": {
                         "application/ld+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/School.jsonld"
+                                "$ref": "#/components/schemas/School.jsonld-denormalization_schools.post"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/School"
+                                "$ref": "#/components/schemas/School-denormalization_schools.post"
                             }
                         },
                         "text/html": {
                             "schema": {
-                                "$ref": "#/components/schemas/School"
+                                "$ref": "#/components/schemas/School-denormalization_schools.post"
                             }
                         }
                     },
@@ -2031,17 +2627,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/School.jsonld"
+                                    "$ref": "#/components/schemas/School.jsonld-school.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/School"
+                                    "$ref": "#/components/schemas/School-school.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/School"
+                                    "$ref": "#/components/schemas/School-school.get"
                                 }
                             }
                         }
@@ -2081,17 +2677,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/School.jsonld"
+                                    "$ref": "#/components/schemas/School.jsonld-school.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/School"
+                                    "$ref": "#/components/schemas/School-school.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/School"
+                                    "$ref": "#/components/schemas/School-school.get"
                                 }
                             }
                         },
@@ -2138,17 +2734,17 @@
                     "content": {
                         "application/ld+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/School.jsonld"
+                                "$ref": "#/components/schemas/School.jsonld-denormalization_barcode.put"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/School"
+                                "$ref": "#/components/schemas/School-denormalization_barcode.put"
                             }
                         },
                         "text/html": {
                             "schema": {
-                                "$ref": "#/components/schemas/School"
+                                "$ref": "#/components/schemas/School-denormalization_barcode.put"
                             }
                         }
                     },
@@ -2189,93 +2785,18 @@
                 ],
                 "deprecated": false
             },
-            "patch": {
-                "operationId": "patchSchoolItem",
+            "parameters": []
+        },
+        "/api/schools/{id}/courses": {
+            "get": {
+                "operationId": "api_schools_courses_get_subresourceSchoolSubresource",
                 "tags": [
+                    "Course",
                     "School"
                 ],
                 "responses": {
                     "200": {
-                        "description": "School resource updated",
-                        "content": {
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/School.jsonld"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/School"
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/School"
-                                }
-                            }
-                        },
-                        "links": {
-                            "GetSchoolItem": {
-                                "operationId": "getSchoolItem",
-                                "parameters": {
-                                    "id": "$response.body#/id"
-                                },
-                                "description": "The `id` value returned in the response can be used as the `id` parameter in `GET /api/schools/{id}`."
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid input"
-                    },
-                    "422": {
-                        "description": "Unprocessable entity"
-                    },
-                    "404": {
-                        "description": "Resource not found"
-                    }
-                },
-                "summary": "Updates the School resource.",
-                "description": "Updates the School resource.",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Resource identifier",
-                        "required": true,
-                        "deprecated": false,
-                        "allowEmptyValue": false,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "style": "simple",
-                        "explode": false,
-                        "allowReserved": false
-                    }
-                ],
-                "requestBody": {
-                    "description": "The updated School resource",
-                    "content": {
-                        "application/merge-patch+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/School"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "deprecated": false
-            },
-            "parameters": []
-        },
-        "/api/technologies": {
-            "get": {
-                "operationId": "getTechnologyCollection",
-                "tags": [
-                    "Technology"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Technology collection",
+                        "description": "School resource",
                         "content": {
                             "application/ld+json": {
                                 "schema": {
@@ -2284,7 +2805,7 @@
                                         "hydra:member": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/Technology.jsonld"
+                                                "$ref": "#/components/schemas/Course.jsonld-course.get"
                                             }
                                         },
                                         "hydra:totalItems": {
@@ -2364,7 +2885,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Technology"
+                                        "$ref": "#/components/schemas/Course-course.get"
                                     }
                                 }
                             },
@@ -2372,7 +2893,156 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Technology"
+                                        "$ref": "#/components/schemas/Course-course.get"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "summary": "Retrieves a School resource.",
+                "description": "Retrieves a School resource.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "School identifier",
+                        "required": true,
+                        "deprecated": false,
+                        "allowEmptyValue": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple",
+                        "explode": false,
+                        "allowReserved": false
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "The collection page number",
+                        "required": false,
+                        "deprecated": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "integer",
+                            "default": 1
+                        },
+                        "style": "form",
+                        "explode": false,
+                        "allowReserved": false
+                    }
+                ],
+                "deprecated": false
+            },
+            "parameters": []
+        },
+        "/api/technologies": {
+            "get": {
+                "operationId": "getTechnologyCollection",
+                "tags": [
+                    "Technology"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Technology collection",
+                        "content": {
+                            "application/ld+json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "hydra:member": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Technology.jsonld-technology.get"
+                                            }
+                                        },
+                                        "hydra:totalItems": {
+                                            "type": "integer",
+                                            "minimum": 0
+                                        },
+                                        "hydra:view": {
+                                            "type": "object",
+                                            "properties": {
+                                                "@id": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "@type": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:first": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:last": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:previous": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                },
+                                                "hydra:next": {
+                                                    "type": "string",
+                                                    "format": "iri-reference"
+                                                }
+                                            }
+                                        },
+                                        "hydra:search": {
+                                            "type": "object",
+                                            "properties": {
+                                                "@type": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:template": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:variableRepresentation": {
+                                                    "type": "string"
+                                                },
+                                                "hydra:mapping": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "@type": {
+                                                                "type": "string"
+                                                            },
+                                                            "variable": {
+                                                                "type": "string"
+                                                            },
+                                                            "property": {
+                                                                "type": "string",
+                                                                "nullable": true
+                                                            },
+                                                            "required": {
+                                                                "type": "boolean"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "hydra:member"
+                                    ]
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Technology-technology.get"
+                                    }
+                                }
+                            },
+                            "text/html": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Technology-technology.get"
                                     }
                                 }
                             }
@@ -2411,17 +3081,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Technology.jsonld"
+                                    "$ref": "#/components/schemas/Technology.jsonld-technology.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Technology"
+                                    "$ref": "#/components/schemas/Technology-technology.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Technology"
+                                    "$ref": "#/components/schemas/Technology-technology.get"
                                 }
                             }
                         },
@@ -2450,17 +3120,17 @@
                     "content": {
                         "application/ld+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Technology.jsonld"
+                                "$ref": "#/components/schemas/Technology.jsonld-denormalization_technologies.post"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Technology"
+                                "$ref": "#/components/schemas/Technology-denormalization_technologies.post"
                             }
                         },
                         "text/html": {
                             "schema": {
-                                "$ref": "#/components/schemas/Technology"
+                                "$ref": "#/components/schemas/Technology-denormalization_technologies.post"
                             }
                         }
                     },
@@ -2482,17 +3152,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Technology.jsonld"
+                                    "$ref": "#/components/schemas/Technology.jsonld-technology.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Technology"
+                                    "$ref": "#/components/schemas/Technology-technology.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Technology"
+                                    "$ref": "#/components/schemas/Technology-technology.get"
                                 }
                             }
                         }
@@ -2532,17 +3202,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Technology.jsonld"
+                                    "$ref": "#/components/schemas/Technology.jsonld-technology.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Technology"
+                                    "$ref": "#/components/schemas/Technology-technology.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Technology"
+                                    "$ref": "#/components/schemas/Technology-technology.get"
                                 }
                             }
                         },
@@ -2589,17 +3259,17 @@
                     "content": {
                         "application/ld+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Technology.jsonld"
+                                "$ref": "#/components/schemas/Technology.jsonld-denormalization_barcode.put"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Technology"
+                                "$ref": "#/components/schemas/Technology-denormalization_barcode.put"
                             }
                         },
                         "text/html": {
                             "schema": {
-                                "$ref": "#/components/schemas/Technology"
+                                "$ref": "#/components/schemas/Technology-denormalization_barcode.put"
                             }
                         }
                     },
@@ -2640,82 +3310,6 @@
                 ],
                 "deprecated": false
             },
-            "patch": {
-                "operationId": "patchTechnologyItem",
-                "tags": [
-                    "Technology"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Technology resource updated",
-                        "content": {
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Technology.jsonld"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Technology"
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Technology"
-                                }
-                            }
-                        },
-                        "links": {
-                            "GetTechnologyItem": {
-                                "operationId": "getTechnologyItem",
-                                "parameters": {
-                                    "id": "$response.body#/id"
-                                },
-                                "description": "The `id` value returned in the response can be used as the `id` parameter in `GET /api/technologies/{id}`."
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid input"
-                    },
-                    "422": {
-                        "description": "Unprocessable entity"
-                    },
-                    "404": {
-                        "description": "Resource not found"
-                    }
-                },
-                "summary": "Updates the Technology resource.",
-                "description": "Updates the Technology resource.",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Resource identifier",
-                        "required": true,
-                        "deprecated": false,
-                        "allowEmptyValue": false,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "style": "simple",
-                        "explode": false,
-                        "allowReserved": false
-                    }
-                ],
-                "requestBody": {
-                    "description": "The updated Technology resource",
-                    "content": {
-                        "application/merge-patch+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Technology"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "deprecated": false
-            },
             "parameters": []
         },
         "/api/works": {
@@ -2735,7 +3329,7 @@
                                         "hydra:member": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/components/schemas/Work.jsonld"
+                                                "$ref": "#/components/schemas/Work.jsonld-work.get"
                                             }
                                         },
                                         "hydra:totalItems": {
@@ -2815,7 +3409,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Work"
+                                        "$ref": "#/components/schemas/Work-work.get"
                                     }
                                 }
                             },
@@ -2823,7 +3417,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Work"
+                                        "$ref": "#/components/schemas/Work-work.get"
                                     }
                                 }
                             }
@@ -2862,17 +3456,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Work.jsonld"
+                                    "$ref": "#/components/schemas/Work.jsonld-work.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Work"
+                                    "$ref": "#/components/schemas/Work-work.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Work"
+                                    "$ref": "#/components/schemas/Work-work.get"
                                 }
                             }
                         },
@@ -2901,17 +3495,17 @@
                     "content": {
                         "application/ld+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Work.jsonld"
+                                "$ref": "#/components/schemas/Work.jsonld-denormalization_works.post"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Work"
+                                "$ref": "#/components/schemas/Work-denormalization_works.post"
                             }
                         },
                         "text/html": {
                             "schema": {
-                                "$ref": "#/components/schemas/Work"
+                                "$ref": "#/components/schemas/Work-denormalization_works.post"
                             }
                         }
                     },
@@ -2933,17 +3527,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Work.jsonld"
+                                    "$ref": "#/components/schemas/Work.jsonld-work.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Work"
+                                    "$ref": "#/components/schemas/Work-work.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Work"
+                                    "$ref": "#/components/schemas/Work-work.get"
                                 }
                             }
                         }
@@ -2983,17 +3577,17 @@
                         "content": {
                             "application/ld+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Work.jsonld"
+                                    "$ref": "#/components/schemas/Work.jsonld-work.get"
                                 }
                             },
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Work"
+                                    "$ref": "#/components/schemas/Work-work.get"
                                 }
                             },
                             "text/html": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Work"
+                                    "$ref": "#/components/schemas/Work-work.get"
                                 }
                             }
                         },
@@ -3040,17 +3634,17 @@
                     "content": {
                         "application/ld+json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Work.jsonld"
+                                "$ref": "#/components/schemas/Work.jsonld-denormalization_barcode.put"
                             }
                         },
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Work"
+                                "$ref": "#/components/schemas/Work-denormalization_barcode.put"
                             }
                         },
                         "text/html": {
                             "schema": {
-                                "$ref": "#/components/schemas/Work"
+                                "$ref": "#/components/schemas/Work-denormalization_barcode.put"
                             }
                         }
                     },
@@ -3091,93 +3685,225 @@
                 ],
                 "deprecated": false
             },
-            "patch": {
-                "operationId": "patchWorkItem",
-                "tags": [
-                    "Work"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Work resource updated",
-                        "content": {
-                            "application/ld+json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Work.jsonld"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Work"
-                                }
-                            },
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Work"
-                                }
-                            }
-                        },
-                        "links": {
-                            "GetWorkItem": {
-                                "operationId": "getWorkItem",
-                                "parameters": {
-                                    "id": "$response.body#/id"
-                                },
-                                "description": "The `id` value returned in the response can be used as the `id` parameter in `GET /api/works/{id}`."
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid input"
-                    },
-                    "422": {
-                        "description": "Unprocessable entity"
-                    },
-                    "404": {
-                        "description": "Resource not found"
-                    }
-                },
-                "summary": "Updates the Work resource.",
-                "description": "Updates the Work resource.",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Resource identifier",
-                        "required": true,
-                        "deprecated": false,
-                        "allowEmptyValue": false,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "style": "simple",
-                        "explode": false,
-                        "allowReserved": false
-                    }
-                ],
-                "requestBody": {
-                    "description": "The updated Work resource",
-                    "content": {
-                        "application/merge-patch+json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Work"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "deprecated": false
-            },
             "parameters": []
         }
     },
     "components": {
         "schemas": {
-            "Company": {
+            "Company-company.get": {
                 "type": "object",
                 "properties": {
                     "id": {
                         "readOnly": true,
                         "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "employees": {
+                        "type": "integer"
+                    },
+                    "location": {
+                        "$ref": "#/components/schemas/Location-company.get"
+                    },
+                    "works": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "iri-reference"
+                        }
+                    }
+                }
+            },
+            "Company-denormalization_barcode.put": {
+                "type": "object"
+            },
+            "Company-denormalization_companies.post": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "employees": {
+                        "type": "integer"
+                    },
+                    "location": {
+                        "type": "string",
+                        "format": "iri-reference"
+                    },
+                    "works": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "iri-reference"
+                        }
+                    }
+                }
+            },
+            "Company-work.get": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "employees": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "Company.jsonld-company.get": {
+                "type": "object",
+                "properties": {
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "employees": {
+                        "type": "integer"
+                    },
+                    "location": {
+                        "$ref": "#/components/schemas/Location.jsonld-company.get"
+                    },
+                    "works": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "iri-reference"
+                        }
+                    }
+                }
+            },
+            "Company.jsonld-denormalization_barcode.put": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    }
+                }
+            },
+            "Company.jsonld-denormalization_companies.post": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
                     },
                     "name": {
                         "type": "string"
@@ -3201,7 +3927,7 @@
                     }
                 }
             },
-            "Company.jsonld": {
+            "Company.jsonld-work.get": {
                 "type": "object",
                 "properties": {
                     "@context": {
@@ -3251,21 +3977,10 @@
                     },
                     "employees": {
                         "type": "integer"
-                    },
-                    "location": {
-                        "type": "string",
-                        "format": "iri-reference"
-                    },
-                    "works": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference"
-                        }
                     }
                 }
             },
-            "Contract": {
+            "Contract-contract.get": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -3274,17 +3989,33 @@
                     },
                     "label": {
                         "type": "string"
-                    },
-                    "works": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference"
-                        }
                     }
                 }
             },
-            "Contract.jsonld": {
+            "Contract-denormalization_barcode.put": {
+                "type": "object"
+            },
+            "Contract-denormalization_contracts.post": {
+                "type": "object",
+                "properties": {
+                    "label": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Contract-work.get": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "label": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Contract.jsonld-contract.get": {
                 "type": "object",
                 "properties": {
                     "@context": {
@@ -3328,22 +4059,333 @@
                     },
                     "label": {
                         "type": "string"
-                    },
-                    "works": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference"
-                        }
                     }
                 }
             },
-            "Course": {
+            "Contract.jsonld-denormalization_barcode.put": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    }
+                }
+            },
+            "Contract.jsonld-denormalization_contracts.post": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "label": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Contract.jsonld-work.get": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "label": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Course-course.get": {
                 "type": "object",
                 "properties": {
                     "id": {
                         "readOnly": true,
                         "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "picture": {
+                        "type": "string"
+                    },
+                    "time": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "$ref": "#/components/schemas/Location-course.get"
+                    },
+                    "school": {
+                        "$ref": "#/components/schemas/School-course.get"
+                    }
+                }
+            },
+            "Course-denormalization_barcode.put": {
+                "type": "object"
+            },
+            "Course-denormalization_courses.post": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "picture": {
+                        "type": "string"
+                    },
+                    "time": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "type": "string",
+                        "format": "iri-reference"
+                    },
+                    "school": {
+                        "type": "string",
+                        "format": "iri-reference"
+                    }
+                }
+            },
+            "Course.jsonld-course.get": {
+                "type": "object",
+                "properties": {
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "picture": {
+                        "type": "string"
+                    },
+                    "time": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "$ref": "#/components/schemas/Location.jsonld-course.get"
+                    },
+                    "school": {
+                        "$ref": "#/components/schemas/School.jsonld-course.get"
+                    }
+                }
+            },
+            "Course.jsonld-denormalization_barcode.put": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    }
+                }
+            },
+            "Course.jsonld-denormalization_courses.post": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
                     },
                     "title": {
                         "type": "string"
@@ -3367,7 +4409,132 @@
                     }
                 }
             },
-            "Course.jsonld": {
+            "Location-company.get": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "label": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "nullable": true
+                    }
+                }
+            },
+            "Location-course.get": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "label": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "nullable": true
+                    }
+                }
+            },
+            "Location-denormalization_barcode.put": {
+                "type": "object"
+            },
+            "Location-denormalization_locations.post": {
+                "type": "object",
+                "properties": {
+                    "label": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "nullable": true
+                    }
+                }
+            },
+            "Location-location.get": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "label": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "nullable": true
+                    }
+                }
+            },
+            "Location-school.get": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "label": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "nullable": true
+                    }
+                }
+            },
+            "Location-work.get": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "label": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "nullable": true
+                    }
+                }
+            },
+            "Location.jsonld-company.get": {
                 "type": "object",
                 "properties": {
                     "@context": {
@@ -3405,6 +4572,802 @@
                         "readOnly": true,
                         "type": "string"
                     },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "label": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "nullable": true
+                    }
+                }
+            },
+            "Location.jsonld-course.get": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "label": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "nullable": true
+                    }
+                }
+            },
+            "Location.jsonld-denormalization_barcode.put": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    }
+                }
+            },
+            "Location.jsonld-denormalization_locations.post": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "label": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "nullable": true
+                    }
+                }
+            },
+            "Location.jsonld-location.get": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "label": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "nullable": true
+                    }
+                }
+            },
+            "Location.jsonld-school.get": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "label": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "nullable": true
+                    }
+                }
+            },
+            "Location.jsonld-work.get": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "label": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "nullable": true
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "nullable": true
+                    }
+                }
+            },
+            "School-course.get": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "$ref": "#/components/schemas/Location-course.get"
+                    }
+                }
+            },
+            "School-denormalization_barcode.put": {
+                "type": "object"
+            },
+            "School-denormalization_schools.post": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "type": "string",
+                        "format": "iri-reference"
+                    }
+                }
+            },
+            "School-school.get": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "$ref": "#/components/schemas/Location-school.get"
+                    }
+                }
+            },
+            "School.jsonld-course.get": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "$ref": "#/components/schemas/Location.jsonld-course.get"
+                    }
+                }
+            },
+            "School.jsonld-denormalization_barcode.put": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    }
+                }
+            },
+            "School.jsonld-denormalization_schools.post": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "type": "string",
+                        "format": "iri-reference"
+                    }
+                }
+            },
+            "School.jsonld-school.get": {
+                "type": "object",
+                "properties": {
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "$ref": "#/components/schemas/Location.jsonld-school.get"
+                    }
+                }
+            },
+            "Technology-denormalization_barcode.put": {
+                "type": "object"
+            },
+            "Technology-denormalization_technologies.post": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "picture": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Technology-technology.get": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "picture": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Technology.jsonld-denormalization_barcode.put": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    }
+                }
+            },
+            "Technology.jsonld-denormalization_technologies.post": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "picture": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Technology.jsonld-technology.get": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                        "readOnly": true,
+                        "oneOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "@vocab": {
+                                        "type": "string"
+                                    },
+                                    "hydra": {
+                                        "type": "string",
+                                        "enum": [
+                                            "http://www.w3.org/ns/hydra/core#"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "@vocab",
+                                    "hydra"
+                                ],
+                                "additionalProperties": true
+                            }
+                        ]
+                    },
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "id": {
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "picture": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Work-denormalization_barcode.put": {
+                "type": "object"
+            },
+            "Work-denormalization_works.post": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "picture": {
+                        "type": "string"
+                    },
+                    "time": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "company": {
+                        "type": "string",
+                        "format": "iri-reference"
+                    },
+                    "contract": {
+                        "type": "string",
+                        "format": "iri-reference"
+                    },
+                    "location": {
+                        "type": "string",
+                        "format": "iri-reference"
+                    }
+                }
+            },
+            "Work-work.get": {
+                "type": "object",
+                "properties": {
                     "id": {
                         "readOnly": true,
                         "type": "integer"
@@ -3421,66 +5384,18 @@
                     "description": {
                         "type": "string"
                     },
+                    "company": {
+                        "$ref": "#/components/schemas/Company-work.get"
+                    },
+                    "contract": {
+                        "$ref": "#/components/schemas/Contract-work.get"
+                    },
                     "location": {
-                        "type": "string",
-                        "format": "iri-reference"
-                    },
-                    "school": {
-                        "type": "string",
-                        "format": "iri-reference"
+                        "$ref": "#/components/schemas/Location-work.get"
                     }
                 }
             },
-            "Location": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "label": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "latitude": {
-                        "type": "number",
-                        "nullable": true
-                    },
-                    "longitude": {
-                        "type": "number",
-                        "nullable": true
-                    },
-                    "schools": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference"
-                        }
-                    },
-                    "companies": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference"
-                        }
-                    },
-                    "works": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference"
-                        }
-                    },
-                    "courses": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference"
-                        }
-                    }
-                }
-            },
-            "Location.jsonld": {
+            "Work.jsonld-denormalization_barcode.put": {
                 "type": "object",
                 "properties": {
                     "@context": {
@@ -3517,80 +5432,10 @@
                     "@type": {
                         "readOnly": true,
                         "type": "string"
-                    },
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "label": {
-                        "type": "string",
-                        "nullable": true
-                    },
-                    "latitude": {
-                        "type": "number",
-                        "nullable": true
-                    },
-                    "longitude": {
-                        "type": "number",
-                        "nullable": true
-                    },
-                    "schools": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference"
-                        }
-                    },
-                    "companies": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference"
-                        }
-                    },
-                    "works": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference"
-                        }
-                    },
-                    "courses": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference"
-                        }
                     }
                 }
             },
-            "School": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string"
-                    },
-                    "location": {
-                        "type": "string",
-                        "format": "iri-reference"
-                    },
-                    "courses": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference"
-                        }
-                    }
-                }
-            },
-            "School.jsonld": {
+            "Work.jsonld-denormalization_works.post": {
                 "type": "object",
                 "properties": {
                     "@context": {
@@ -3627,107 +5472,6 @@
                     "@type": {
                         "readOnly": true,
                         "type": "string"
-                    },
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "name": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string"
-                    },
-                    "location": {
-                        "type": "string",
-                        "format": "iri-reference"
-                    },
-                    "courses": {
-                        "type": "array",
-                        "items": {
-                            "type": "string",
-                            "format": "iri-reference"
-                        }
-                    }
-                }
-            },
-            "Technology": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "title": {
-                        "type": "string"
-                    },
-                    "picture": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string"
-                    }
-                }
-            },
-            "Technology.jsonld": {
-                "type": "object",
-                "properties": {
-                    "@context": {
-                        "readOnly": true,
-                        "oneOf": [
-                            {
-                                "type": "string"
-                            },
-                            {
-                                "type": "object",
-                                "properties": {
-                                    "@vocab": {
-                                        "type": "string"
-                                    },
-                                    "hydra": {
-                                        "type": "string",
-                                        "enum": [
-                                            "http://www.w3.org/ns/hydra/core#"
-                                        ]
-                                    }
-                                },
-                                "required": [
-                                    "@vocab",
-                                    "hydra"
-                                ],
-                                "additionalProperties": true
-                            }
-                        ]
-                    },
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
-                    },
-                    "title": {
-                        "type": "string"
-                    },
-                    "picture": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string"
-                    }
-                }
-            },
-            "Work": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "readOnly": true,
-                        "type": "integer"
                     },
                     "title": {
                         "type": "string"
@@ -3755,9 +5499,17 @@
                     }
                 }
             },
-            "Work.jsonld": {
+            "Work.jsonld-work.get": {
                 "type": "object",
                 "properties": {
+                    "@id": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "@type": {
+                        "readOnly": true,
+                        "type": "string"
+                    },
                     "@context": {
                         "readOnly": true,
                         "oneOf": [
@@ -3785,14 +5537,6 @@
                             }
                         ]
                     },
-                    "@id": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
-                    "@type": {
-                        "readOnly": true,
-                        "type": "string"
-                    },
                     "id": {
                         "readOnly": true,
                         "type": "integer"
@@ -3810,16 +5554,13 @@
                         "type": "string"
                     },
                     "company": {
-                        "type": "string",
-                        "format": "iri-reference"
+                        "$ref": "#/components/schemas/Company.jsonld-work.get"
                     },
                     "contract": {
-                        "type": "string",
-                        "format": "iri-reference"
+                        "$ref": "#/components/schemas/Contract.jsonld-work.get"
                     },
                     "location": {
-                        "type": "string",
-                        "format": "iri-reference"
+                        "$ref": "#/components/schemas/Location.jsonld-work.get"
                     }
                 }
             }

@@ -5,9 +5,23 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CourseRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ * normalizationContext={"groups"={"course:get"}, "skip_null_values" = false },
+ *      attributes={"security"="is_granted('ROLE_ADMIN')"},
+ *      collectionOperations={
+ *          "get"={"groups"={"courses:get"}, "security"="is_granted('ROLE_USER')"},
+ *          "post"={"denormalization_context"={"groups"="denormalization_courses:post"}},
+ *      },
+ *      itemOperations={
+ *          "get"={"groups"={"course:get"}, "security"="is_granted('ROLE_USER') or object.getUser() == user"},
+ *          "put"={"groups"={"course:put"}, "security"="is_granted('ROLE_ADMIN')", "denormalization_context"={"groups"="denormalization_barcode:put"}},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN') or object.getUser() == user"},
+ *      }
+ * )
  * @ORM\Entity(repositoryClass=CourseRepository::class)
  */
 class Course
@@ -16,38 +30,45 @@ class Course
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"course:get","courses:get"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"course:get","courses:get", "denormalization_courses:post", "course:put"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"course:get","courses:get", "denormalization_courses:post", "course:put"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"course:get","courses:get", "denormalization_courses:post", "course:put"})
      */
     private $time;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"course:get","courses:get", "denormalization_courses:post", "course:put"})
      */
     private $description;
 
     /**
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="courses")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"course:get","courses:get", "denormalization_courses:post", "course:put"})
      */
     private $location;
 
     /**
      * @ORM\ManyToOne(targetEntity=School::class, inversedBy="courses")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"course:get","courses:get", "denormalization_courses:post", "course:put"})
      */
     private $school;
 

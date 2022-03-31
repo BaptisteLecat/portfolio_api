@@ -7,9 +7,23 @@ use App\Repository\SchoolRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ * normalizationContext={"groups"={"school:get"}, "skip_null_values" = false },
+ *      attributes={"security"="is_granted('ROLE_ADMIN')"},
+ *      collectionOperations={
+ *          "get"={"groups"={"schools:get"}, "security"="is_granted('ROLE_USER')"},
+ *          "post"={"denormalization_context"={"groups"="denormalization_schools:post"}},
+ *      },
+ *      itemOperations={
+ *          "get"={"groups"={"school:get"}, "security"="is_granted('ROLE_USER') or object.getUser() == user"},
+ *          "put"={"groups"={"school:put"}, "security"="is_granted('ROLE_ADMIN')", "denormalization_context"={"groups"="denormalization_barcode:put"}},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN') or object.getUser() == user"},
+ *      }
+ * )
  * @ORM\Entity(repositoryClass=SchoolRepository::class)
  */
 class School
@@ -18,27 +32,32 @@ class School
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"school:get","schools:get", "course:get","courses:get"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"school:get","schools:get", "denormalization_schools:post", "school:put", "course:get","courses:get"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"school:get","schools:get", "denormalization_schools:post", "school:put", "course:get","courses:get"})
      */
     private $description;
 
     /**
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="schools")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"school:get","schools:get", "denormalization_schools:post", "school:put", "course:get","courses:get"})
      */
     private $location;
 
     /**
      * @ORM\OneToMany(targetEntity=Course::class, mappedBy="school", orphanRemoval=true)
+     * @ApiSubresource(maxDepth=1)
      */
     private $courses;
 

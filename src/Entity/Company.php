@@ -7,9 +7,23 @@ use App\Repository\CompanyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ * normalizationContext={"groups"={"company:get"}, "skip_null_values" = false },
+ *      attributes={"security"="is_granted('ROLE_ADMIN')"},
+ *      collectionOperations={
+ *          "get"={"groups"={"companies:get"}, "security"="is_granted('ROLE_USER')"},
+ *          "post"={"denormalization_context"={"groups"="denormalization_companies:post"}},
+ *      },
+ *      itemOperations={
+ *          "get"={"groups"={"company:get"}, "security"="is_granted('ROLE_USER') or object.getUser() == user"},
+ *          "put"={"groups"={"company:put"}, "security"="is_granted('ROLE_ADMIN')", "denormalization_context"={"groups"="denormalization_barcode:put"}},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN') or object.getUser() == user"},
+ *      }
+ * )
  * @ORM\Entity(repositoryClass=CompanyRepository::class)
  */
 class Company
@@ -18,32 +32,39 @@ class Company
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"company:get","companies:get", "work:get","works:get"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"company:get","companies:get", "denormalization_companies:post", "company:put", "work:get","works:get"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"company:get","companies:get", "denormalization_companies:post", "company:put", "work:get","works:get"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"company:get","companies:get", "denormalization_companies:post", "company:put", "work:get","works:get"})
      */
     private $employees;
 
     /**
      * @ORM\ManyToOne(targetEntity=Location::class, inversedBy="companies")
+     * @Groups({"company:get","companies:get", "denormalization_companies:post", "company:put"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $location;
 
     /**
      * @ORM\OneToMany(targetEntity=Work::class, mappedBy="company", orphanRemoval=true)
+     * @Groups({"company:get","companies:get", "denormalization_companies:post", "company:put"})
+     * @ApiSubresource(maxDepth=1)
      */
     private $works;
 
