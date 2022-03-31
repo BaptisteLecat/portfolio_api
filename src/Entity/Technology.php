@@ -11,15 +11,14 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
 /**
  * @ApiResource(
  * normalizationContext={"groups"={"technology:get"}, "skip_null_values" = false },
- *      attributes={"security"="is_granted('ROLE_ADMIN')"},
  *      collectionOperations={
- *          "get"={"groups"={"technologies:get"}, "security"="is_granted('ROLE_USER')"},
- *          "post"={"denormalization_context"={"groups"="denormalization_technologies:post"}},
+ *          "get"={"groups"={"technologies:get"}},
+ *          "post"={"security"="is_granted('ROLE_ADMIN')", "denormalization_context"={"groups"="denormalization_technologies:post"}},
  *      },
  *      itemOperations={
- *          "get"={"groups"={"technology:get"}, "security"="is_granted('ROLE_USER') or object.getUser() == user"},
+ *          "get"={"groups"={"technology:get"}},
  *          "put"={"groups"={"technology:put"}, "security"="is_granted('ROLE_ADMIN')", "denormalization_context"={"groups"="denormalization_barcode:put"}},
- *          "delete"={"security"="is_granted('ROLE_ADMIN') or object.getUser() == user"},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN')"},
  *      }
  * )
  * @ORM\Entity(repositoryClass=TechnologyRepository::class)

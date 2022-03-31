@@ -11,15 +11,14 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
 /**
  * @ApiResource(
  * normalizationContext={"groups"={"course:get"}, "skip_null_values" = false },
- *      attributes={"security"="is_granted('ROLE_ADMIN')"},
  *      collectionOperations={
- *          "get"={"groups"={"courses:get"}, "security"="is_granted('ROLE_USER')"},
- *          "post"={"denormalization_context"={"groups"="denormalization_courses:post"}},
+ *          "get"={"groups"={"courses:get"}},
+ *          "post"={"security"="is_granted('ROLE_ADMIN')", "denormalization_context"={"groups"="denormalization_courses:post"}},
  *      },
  *      itemOperations={
- *          "get"={"groups"={"course:get"}, "security"="is_granted('ROLE_USER') or object.getUser() == user"},
+ *          "get"={"groups"={"course:get"}},
  *          "put"={"groups"={"course:put"}, "security"="is_granted('ROLE_ADMIN')", "denormalization_context"={"groups"="denormalization_barcode:put"}},
- *          "delete"={"security"="is_granted('ROLE_ADMIN') or object.getUser() == user"},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN')"},
  *      }
  * )
  * @ORM\Entity(repositoryClass=CourseRepository::class)

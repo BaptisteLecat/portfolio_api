@@ -13,15 +13,14 @@ use ApiPlatform\Core\Annotation\ApiSubresource;
 /**
  * @ApiResource(
  * normalizationContext={"groups"={"location:get"}, "skip_null_values" = false },
- *      attributes={"security"="is_granted('ROLE_ADMIN')"},
  *      collectionOperations={
- *          "get"={"groups"={"locations:get"}, "security"="is_granted('ROLE_USER')"},
- *          "post"={"denormalization_context"={"groups"="denormalization_locations:post"}},
+ *          "get"={"groups"={"locations:get"}},
+ *          "post"={"security"="is_granted('ROLE_ADMIN')", "denormalization_context"={"groups"="denormalization_locations:post"}},
  *      },
  *      itemOperations={
- *          "get"={"groups"={"location:get"}, "security"="is_granted('ROLE_USER') or object.getUser() == user"},
+ *          "get"={"groups"={"location:get"}},
  *          "put"={"groups"={"location:put"}, "security"="is_granted('ROLE_ADMIN')", "denormalization_context"={"groups"="denormalization_barcode:put"}},
- *          "delete"={"security"="is_granted('ROLE_ADMIN') or object.getUser() == user"},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN')"},
  *      }
  * )
  * @ORM\Entity(repositoryClass=LocationRepository::class)
