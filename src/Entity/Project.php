@@ -66,7 +66,7 @@ class Project
     private $start;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      * @Groups({"project:get","projects:get","rubric:get","rubrics:get", "denormalization_projects:post"})
      */
     private $end;
