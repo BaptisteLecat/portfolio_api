@@ -31,19 +31,19 @@ class School
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"school:get","schools:get", "course:get","courses:get"})
+     * @Groups({"school:get","schools:get", "course:get","courses:get", "project:get","projects:get"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"school:get","schools:get", "denormalization_schools:post", "school:put", "course:get","courses:get"})
+     * @Groups({"school:get","schools:get", "denormalization_schools:post", "school:put", "course:get","courses:get", "project:get","projects:get"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"school:get","schools:get", "denormalization_schools:post", "school:put", "course:get","courses:get"})
+     * @Groups({"school:get","schools:get", "denormalization_schools:post", "school:put", "course:get","courses:get", "project:get","projects:get"})
      */
     private $description;
 
@@ -60,9 +60,16 @@ class School
      */
     private $courses;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Project::class, mappedBy="school")
+     * @ApiSubresource(maxDepth=1)
+     */
+    private $projects;
+
     public function __construct()
     {
         $this->courses = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -130,6 +137,36 @@ class School
             // set the owning side to null (unless already changed)
             if ($course->getSchool() === $this) {
                 $course->setSchool(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Project>
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(Project $project): self
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects[] = $project;
+            $project->setSchool($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Project $project): self
+    {
+        if ($this->projects->removeElement($project)) {
+            // set the owning side to null (unless already changed)
+            if ($project->getSchool() === $this) {
+                $project->setSchool(null);
             }
         }
 

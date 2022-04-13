@@ -59,6 +59,30 @@ class Project
      */
     private $rubrics;
 
+    /**
+     * @ORM\Column(type="date")
+     * @Groups({"project:get","projects:get","rubric:get","rubrics:get", "denormalization_projects:post"})
+     */
+    private $start;
+
+    /**
+     * @ORM\Column(type="date")
+     * @Groups({"project:get","projects:get","rubric:get","rubrics:get", "denormalization_projects:post"})
+     */
+    private $end;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="projects")
+     * @Groups({"project:get","projects:get","rubric:get","rubrics:get"})
+     */
+    private $company;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=School::class, inversedBy="projects")
+     * @Groups({"project:get","projects:get","rubric:get","rubrics:get"})
+     */
+    private $school;
+
     public function __construct()
     {
         $this->rubrics = new ArrayCollection();
@@ -131,6 +155,54 @@ class Project
                 $rubric->setProject(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStart(): ?\DateTimeInterface
+    {
+        return $this->start;
+    }
+
+    public function setStart(\DateTimeInterface $start): self
+    {
+        $this->start = $start;
+
+        return $this;
+    }
+
+    public function getEnd(): ?\DateTimeInterface
+    {
+        return $this->end;
+    }
+
+    public function setEnd(\DateTimeInterface $end): self
+    {
+        $this->end = $end;
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): self
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    public function getSchool(): ?School
+    {
+        return $this->school;
+    }
+
+    public function setSchool(?School $school): self
+    {
+        $this->school = $school;
 
         return $this;
     }
