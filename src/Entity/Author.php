@@ -37,14 +37,14 @@ class Author
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"author:get","authors:get", "missions:get", "mission:get"})
+     * @Groups({"author:get","authors:get", "missions:get", "mission:get", "denormalization_authors:post"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
      * @Groups({"author:get","authors:get"})
-     * @Groups({"author:get","authors:get", "missions:get", "mission:get"})
+     * @Groups({"author:get","authors:get", "missions:get", "mission:get", "denormalization_authors:post"})
      */
     private $picture;
 

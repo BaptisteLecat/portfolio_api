@@ -37,7 +37,7 @@ class Theme
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"theme:get","themes:get"})
+     * @Groups({"theme:get","themes:get", "denormalization_themes:post"})
      */
     private $label;
 

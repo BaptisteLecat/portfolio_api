@@ -37,13 +37,13 @@ class Mission
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"mission:get","missions:get"})
+     * @Groups({"mission:get","missions:get", "denormalization_missions:post"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"mission:get","missions:get"})
+     * @Groups({"mission:get","missions:get", "denormalization_missions:post"})
      */
     private $content;
 

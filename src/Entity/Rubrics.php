@@ -35,25 +35,25 @@ class Rubrics
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"rubric:get","rubrics:get"})
+     * @Groups({"rubric:get","rubrics:get", "denormalization_rubrics:post"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"rubric:get","rubrics:get"})
+     * @Groups({"rubric:get","rubrics:get","denormalization_rubrics:post"})
      */
     private $subtitle;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"rubric:get","rubrics:get"})
+     * @Groups({"rubric:get","rubrics:get", "denormalization_rubrics:post"})
      */
     private $picture;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"rubric:get","rubrics:get"})
+     * @Groups({"rubric:get","rubrics:get", "denormalization_rubrics:post"})
      */
     private $content;
 
