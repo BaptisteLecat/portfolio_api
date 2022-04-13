@@ -73,13 +73,13 @@ class Project
 
     /**
      * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="projects")
-     * @Groups({"project:get","projects:get","rubric:get","rubrics:get"})
+     * @Groups({"project:get","projects:get","rubric:get","rubrics:get", "denormalization_projects:post"})
      */
     private $company;
 
     /**
      * @ORM\ManyToOne(targetEntity=School::class, inversedBy="projects")
-     * @Groups({"project:get","projects:get","rubric:get","rubrics:get"})
+     * @Groups({"project:get","projects:get","rubric:get","rubrics:get", "denormalization_projects:post"})
      */
     private $school;
 
