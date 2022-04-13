@@ -31,25 +31,25 @@ class Company
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"company:get","companies:get", "work:get","works:get"})
+     * @Groups({"company:get","companies:get", "work:get","works:get", "project:get","projects:get"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"company:get","companies:get", "denormalization_companies:post", "company:put", "work:get","works:get"})
+     * @Groups({"company:get","companies:get", "denormalization_companies:post", "company:put", "work:get","works:get", "project:get","projects:get"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"company:get","companies:get", "denormalization_companies:post", "company:put", "work:get","works:get"})
+     * @Groups({"company:get","companies:get", "denormalization_companies:post", "company:put", "work:get","works:get", "project:get","projects:get"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"company:get","companies:get", "denormalization_companies:post", "company:put", "work:get","works:get"})
+     * @Groups({"company:get","companies:get", "denormalization_companies:post", "company:put", "work:get","works:get", "project:get","projects:get"})
      */
     private $employees;
 
@@ -62,14 +62,20 @@ class Company
 
     /**
      * @ORM\OneToMany(targetEntity=Work::class, mappedBy="company", orphanRemoval=true)
-     * @Groups({"company:get","companies:get", "denormalization_companies:post", "company:put"})
      * @ApiSubresource(maxDepth=1)
      */
     private $works;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Project::class, mappedBy="company")
+     * @ApiSubresource(maxDepth=1)
+     */
+    private $projects;
+
     public function __construct()
     {
         $this->works = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -149,6 +155,36 @@ class Company
             // set the owning side to null (unless already changed)
             if ($work->getCompany() === $this) {
                 $work->setCompany(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Project>
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(Project $project): self
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects[] = $project;
+            $project->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Project $project): self
+    {
+        if ($this->projects->removeElement($project)) {
+            // set the owning side to null (unless already changed)
+            if ($project->getCompany() === $this) {
+                $project->setCompany(null);
             }
         }
 
