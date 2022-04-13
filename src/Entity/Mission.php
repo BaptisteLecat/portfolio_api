@@ -56,7 +56,7 @@ class Mission
     /**
      * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="missions")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"mission:get","missions:get"})
+     * @Groups({"mission:get","missions:get", "denormalization_missions:post"})
      */
     private $author;
 
