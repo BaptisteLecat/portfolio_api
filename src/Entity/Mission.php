@@ -69,6 +69,7 @@ class Mission
     public function __construct()
     {
         $this->themes = new ArrayCollection();
+        $this->created_at = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
