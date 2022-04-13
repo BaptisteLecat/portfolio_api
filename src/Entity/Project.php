@@ -37,19 +37,19 @@ class Project
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"project:get","projects:get","rubric:get","rubrics:get"})
+     * @Groups({"project:get","projects:get","rubric:get","rubrics:get", "denormalization_projects:post"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"project:get","projects:get","rubric:get","rubrics:get"})
+     * @Groups({"project:get","projects:get","rubric:get","rubrics:get", "denormalization_projects:post"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"project:get","projects:get","rubric:get","rubrics:get"})
+     * @Groups({"project:get","projects:get","rubric:get","rubrics:get", "denormalization_projects:post"})
      */
     private $picture;
 
