@@ -66,6 +66,11 @@ class Mission
      */
     private $themes;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $subtitle;
+
     public function __construct()
     {
         $this->themes = new ArrayCollection();
@@ -145,6 +150,18 @@ class Mission
     public function removeTheme(Theme $theme): self
     {
         $this->themes->removeElement($theme);
+
+        return $this;
+    }
+
+    public function getSubtitle(): ?string
+    {
+        return $this->subtitle;
+    }
+
+    public function setSubtitle(?string $subtitle): self
+    {
+        $this->subtitle = $subtitle;
 
         return $this;
     }
