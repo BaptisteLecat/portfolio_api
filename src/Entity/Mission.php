@@ -68,6 +68,7 @@ class Mission
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"mission:get","missions:get", "denormalization_missions:post"})
      */
     private $subtitle;
 
