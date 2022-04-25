@@ -11,9 +11,9 @@ First step run `~ composer install`
 Then setup a database : preferably MYSQL.
 You need to update the .env, so you can copy it and create a .env.local file and uncomment the MYSQL database connection string.
 
-Run `~ php/bin console doc:doc:status`
+Run `~ php/bin console doc:mig:status`
 
-Then make `~ php/bin console doc:doc:mig`
+Then make `~ php/bin console doc:mig:mig`
 
 ## That's all ! ##
 
